@@ -31,7 +31,6 @@ try {
   .then(data => console.log(data))
   .catch(error => console.log(error.message));
   
-  // Set timeout for the requests
   const timeout = setTimeout(function() {
     xhrUrl.abort();
     xhrDom.abort();
